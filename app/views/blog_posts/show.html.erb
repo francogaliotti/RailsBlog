@@ -1,0 +1,10 @@
+<h1><%= @blog_post.title%> </h1>
+<%=@blog_post.body%>
+<%=@blog_post.user.email%>
+<% if (user_signed_in? and current_user == @blog_post.user) %>
+    <div>
+        <%= link_to 'Edit', edit_blog_post_path(@blog_post) %>
+        <%= button_to "Delete", @blog_post, method: :delete, data: {turbo_confirm: "Are you sure"} %>
+    </div>
+<% end %>
+
