@@ -2,8 +2,17 @@
 
 <% @blog_posts.each do |blog_post|%>
     <div>
-        <h2><%= link_to blog_post.title, blog_post  %> </h2>
+        <h2>
+            <%= link_to blog_post.title, blog_post  %> 
+            <% if blog_post.draft? %>
+                <i style="color: gray" >draft</i>
+            <% elsif blog_post.scheduled? %>
+                <i style="color: blue" >scheduled</i>
+            <% end %>
+        </h2>
+        
         <%=blog_post.body%>
+        <br/>
         <%=blog_post.user.email%>
     </div>
 <%end%>
