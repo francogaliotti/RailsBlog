@@ -11,8 +11,10 @@
             <% end %>
         </h2>
         
-        <%=blog_post.body%>
+        <%=blog_post.content%>
         <br/>
         <%=blog_post.user.email%>
     </div>
 <%end%>
+
+<%== pagy_nav @pagy%>
