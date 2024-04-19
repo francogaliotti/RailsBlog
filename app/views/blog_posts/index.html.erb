@@ -17,4 +17,8 @@
     </div>
 <%end%>
 
-<%== pagy_nav @pagy%>
+<%console%>
+
+<% if @pagy.count > @pagy.items %>
+    <%== pagy_nav @pagy%>
+<% end %>

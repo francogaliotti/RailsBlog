@@ -8,6 +8,6 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-100.times do |i|
+50.times do |i|
     BlogPost.create(title: "Blog Post #{i}", content: "This is the content for the blog post #{i}", user_id: 1, published_at: 1.year.ago)
 end

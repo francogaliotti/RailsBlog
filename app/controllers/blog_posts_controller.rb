@@ -5,7 +5,10 @@ class BlogPostsController < ApplicationController
     def index
         @blog_posts = user_signed_in? ? (BlogPost.sorted.get_mine(current_user.id).or(BlogPost.published)) : BlogPost.sorted.published
         @pagy, @blog_posts = pagy(@blog_posts)
-      end      
+    rescue Pagy::OverflowError
+        params[:page] = 1
+        retry
+    end      
 
     def show 
     end
