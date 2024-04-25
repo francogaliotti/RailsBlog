@@ -1,4 +1,4 @@
-class CommentController < ApplicationController
+class CommentsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_comment, only: [:edit, :update, :destroy]
 
@@ -24,7 +24,7 @@ class CommentController < ApplicationController
 
     def update    
         if @comment.update(comment_params)
-          redirect_to blog_post_path(params[:blog_post_id]), notice: 'Comment was successfully updated.'
+          redirect_to blog_post_path(@comment.blog_post_id), notice: 'Comment was successfully updated.'
         else
           render :edit, status: :unprocessable_entity
         end

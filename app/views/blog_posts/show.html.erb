@@ -1,10 +1,25 @@
 <h1><%= @blog_post.title%> </h1>
 <%=@blog_post.content%>
 <%=@blog_post.user.email%>
-<% if (user_signed_in? and current_user == @blog_post.user) %>
+<% if user_signed_in? %>
     <div>
-        <%= link_to 'Edit', edit_blog_post_path(@blog_post) %>
-        <%= button_to "Delete", @blog_post, method: :delete, data: {turbo_confirm: "Are you sure"} %>
+        <%= link_to 'Edit', edit_blog_post_path(@blog_post) if current_user == @blog_post.user%>
+        <%= link_to 'Comment', new_blog_post_comment_path(@blog_post) %>
+        <%= button_to "Delete", @blog_post, method: :delete, data: {turbo_confirm: "Are you sure"} if current_user == @blog_post.user%>
     </div>
+<% end %>
+<br/>
+<br/>
+<% @comments.each do |comment| %>
+    <p><%= comment.content %></p>
+    <p><%= comment.user.email %></p>
+    <p>
+        <%= comment.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+        <% if current_user == comment.user %>
+            <%= link_to 'Edit', edit_blog_post_comment_path(@blog_post, comment) %>
+            <%= button_to "Delete", blog_post_comment_path(@blog_post, comment), method: :delete, data: {turbo_confirm: "Are you sure"} %>
+        <% end %>    
+    </p>
+    <br/>
 <% end %>
 
