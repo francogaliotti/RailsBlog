@@ -11,6 +11,7 @@ class BlogPostsController < ApplicationController
     end      
 
     def show 
+        @comments = Comment.by_blog_post(@blog_post.id)
     end
 
     def new 

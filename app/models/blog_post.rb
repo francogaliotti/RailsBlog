@@ -5,6 +5,7 @@ class BlogPost < ApplicationRecord
     validates :content, presence: true
 
     belongs_to :user
+    has_many :comments, dependent: :destroy
 
     scope :sorted, -> { order(published_at: :desc, updated_at: :desc )}
     scope :draft, -> { where(published_at: nil) }
